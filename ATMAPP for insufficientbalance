@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+class Customer {
+    String name = "Charan";
+    int cid = 221;
+    String accno = "xxxxxxx2416";
+    String branch = "NPL";
+    String bank = "SBI";
+    int inibal = 100000;
+    int mypin = 2124;
+
+    public void display() {
+        System.out.println("Name: " + name);
+        System.out.println("CID: " + cid);
+        System.out.println("Account No: " + accno);
+        System.out.println("Branch: " + branch);
+        System.out.println("Bank: " + bank);
+    }
+
+    public void withdraw(int pin, int amount) {
+        if (pin != mypin) {
+            System.out.println("Incorrect PIN");
+        } else if (amount > inibal) {
+            System.out.println("Insufficient Balance");
+        } else {
+            inibal -= amount;
+            System.out.println("₹" + amount + " withdrawn. Remaining Balance: ₹" + inibal);
+        }
+    }
+
+    public void checkBalance(int pin) {
+        if (pin == mypin) {
+            System.out.println("Current Balance: ₹" + inibal);
+        } else {
+            System.out.println("Incorrect PIN");
+        }
+    }
+}
+
+public class AtmApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Customer c1 = new Customer();
+        System.out.print("Enter your PIN: ");
+        int enteredPin = sc.nextInt();
+        System.out.println();
+        c1.display();
+        c1.withdraw(enteredPin, 250000);
+        c1.checkBalance(enteredPin);
+        sc.close();
+    }
+}
+OUTPUT:
+Enter your PIN: 2124
+
+Name: Charan
+CID: 221
+Account No: xxxxxxx2416
+Branch: NPL
+Bank: SBI
+Insufficient Balance
+Current Balance: ₹100000
